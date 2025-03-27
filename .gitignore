@@ -30,3 +30,31 @@
 *.exe
 *.out
 *.app
+
+# macOS metadata
+.DS_Store
+
+# Xcode
+*.xcuserstate
+*.xcworkspace
+*.xcuserdata/
+*.swp
+
+# Build artifacts
+build/
+DerivedData/
+*.o
+*.out
+*.a
+*.dylib
+
+# CMake (if used)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+
+**/xcuserdata/
+**/*.xcuserdatad/
+**/*.xcuserstate

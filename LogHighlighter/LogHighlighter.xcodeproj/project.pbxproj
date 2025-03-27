@@ -28,6 +28,11 @@
 			path = LogHighlighter;
 			sourceTree = "<group>";
 		};
+		62A11EC32D94D64000E5CE10 /* imgui */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = imgui;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +49,7 @@
 		62A11E9F2D94CBC400E5CE10 = {
 			isa = PBXGroup;
 			children = (
+				62A11EC32D94D64000E5CE10 /* imgui */,
 				62A11EAA2D94CBC400E5CE10 /* LogHighlighter */,
 				62A11EA92D94CBC400E5CE10 /* Products */,
 			);
@@ -74,6 +80,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				62A11EAA2D94CBC400E5CE10 /* LogHighlighter */,
+				62A11EC32D94D64000E5CE10 /* imgui */,
 			);
 			name = LogHighlighter;
 			packageProductDependencies = (

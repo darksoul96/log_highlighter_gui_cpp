@@ -28,11 +28,6 @@
 			path = LogHighlighter;
 			sourceTree = "<group>";
 		};
-		62A11EC32D94D64000E5CE10 /* imgui */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = imgui;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +44,6 @@
 		62A11E9F2D94CBC400E5CE10 = {
 			isa = PBXGroup;
 			children = (
-				62A11EC32D94D64000E5CE10 /* imgui */,
 				62A11EAA2D94CBC400E5CE10 /* LogHighlighter */,
 				62A11EA92D94CBC400E5CE10 /* Products */,
 			);
@@ -80,7 +74,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				62A11EAA2D94CBC400E5CE10 /* LogHighlighter */,
-				62A11EC32D94D64000E5CE10 /* imgui */,
 			);
 			name = LogHighlighter;
 			packageProductDependencies = (
@@ -185,11 +178,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "/opt/homebrew/lib/**";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = /opt/homebrew/include;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -240,6 +235,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "/opt/homebrew/lib/**";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -252,7 +248,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_LIMIT_MACROS,
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "";
+				SYSTEM_HEADER_SEARCH_PATHS = "/opt/homebrew/include/**";
+				USER_HEADER_SEARCH_PATHS = "/opt/homebrew/include/**";
 			};
 			name = Debug;
 		};
@@ -260,7 +273,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "";
+				SYSTEM_HEADER_SEARCH_PATHS = "/opt/homebrew/include/**";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "/opt/homebrew/include/**";
 			};
 			name = Release;
 		};

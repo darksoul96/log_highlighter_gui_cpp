@@ -128,6 +128,7 @@
 				TargetAttributes = {
 					62A11EA72D94CBC400E5CE10 = {
 						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -292,6 +293,7 @@
 		62A11EB02D94CBC400E5CE10 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -315,6 +317,8 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = /opt/homebrew/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = /opt/homebrew/include;
 			};
@@ -323,6 +327,7 @@
 		62A11EB12D94CBC400E5CE10 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__STDC_LIMIT_MACROS,
@@ -340,6 +345,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "";
+				SWIFT_VERSION = 6.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = /opt/homebrew/include;
 			};

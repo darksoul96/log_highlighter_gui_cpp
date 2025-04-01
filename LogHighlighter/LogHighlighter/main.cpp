@@ -58,11 +58,11 @@ void ReadFile(const std::string &filepath, std::vector<std::string>& log_lines) 
     file.close();
 }
 
-// Main code
 int main(int, char**)
 {
     /*{
         Timer timer;
+        
     }*/
     
     std::string filepath = "/Users/wso2/Desktop/wso2carbon.log";
@@ -71,7 +71,6 @@ int main(int, char**)
     LogInformation log_information;
     log_information.title = "Log";
     log_information.log_lines.reserve(filesize);
-    //log_information.log_lines.reserve(10000);
     
     ReadFile(filepath, log_information.log_lines);
     App app;

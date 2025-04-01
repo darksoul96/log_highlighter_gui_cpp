@@ -1,0 +1,25 @@
+#ifndef TimerBenchmark_h
+#define TimerBenchmark_h
+
+class Timer {
+
+public:
+    Timer() {
+        m_StartTime = std::chrono::high_resolution_clock::now();
+    }
+    
+    ~Timer() {
+        auto endTime = std::chrono::high_resolution_clock::now();
+        auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTime).time_since_epoch();
+        
+        auto end = std::chrono::time_point_cast<std::chrono::microseconds>(endTime).time_since_epoch();
+        auto duration = end - start;
+        auto duration_miliseconds = duration * 0.001;
+        
+        std::cout << duration << " microseconds" << std::endl;
+        std::cout << duration_miliseconds << " miliseconds" << std::endl;
+    }
+private:
+    std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTime;
+};
+#endif /* TimerBenchmark_h */

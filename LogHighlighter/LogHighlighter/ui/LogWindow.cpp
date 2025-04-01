@@ -25,7 +25,7 @@ void LogWindow::Create(const LogInformation& log_information) {
     // Simple window
     ImGui::Begin(log_information.title.c_str());
     
-    ImGui::BeginChild("LogRegion", ImVec2(0, 800), true, ImGuiWindowFlags_HorizontalScrollbar);
+    ImGui::BeginChild("LogRegion", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
     // Loop through your log lines
     for (const auto& line : log_information.log_lines) {
         if (line.find(ERROR_LINE) != std::string::npos) {

@@ -51,7 +51,7 @@ void App::Cleanup() {
 }
 
 
-void App::Run() {
+void App::Run(const LogInformation& log_information) {
     
     Init();
     
@@ -65,7 +65,7 @@ void App::Run() {
         ImGui::NewFrame();
        
         //Call Log Window Rendering
-        m_LogWindow.Create();
+        m_LogWindow.Create(log_information);
         
         ImGui::End();
 

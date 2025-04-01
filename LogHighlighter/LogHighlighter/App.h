@@ -1,5 +1,5 @@
 #include "ui/LogWindow.h"
-
+#include <string>
 #ifndef App_h
 #define App_h
 
@@ -7,8 +7,7 @@
 class App {
    
 public:
-
-    void Run();
+    void Run(const LogInformation& log_information);
 
 private:
     struct GLFWwindow* m_Window = nullptr;

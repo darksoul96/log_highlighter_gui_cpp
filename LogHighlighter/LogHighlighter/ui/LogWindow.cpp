@@ -22,11 +22,9 @@ constexpr ImU32 STACK_COLOR = IM_COL32(233, 196, 106, 255);
 
 
 void LogWindow::Create(const LogInformation& log_information) {
-    // Simple window
     ImGui::Begin(log_information.title.c_str());
-    
-    ImGui::BeginChild("LogRegion", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
-    // Loop through your log lines
+    ImVec2 avail = ImGui::GetContentRegionAvail();
+    ImGui::BeginChild("LogRegion", avail, true, ImGuiWindowFlags_HorizontalScrollbar);
     for (const auto& line : log_information.log_lines) {
         if (line.find(ERROR_LINE) != std::string::npos) {
             ImGui::PushStyleColor(ImGuiCol_Text, ERROR_COLOR);

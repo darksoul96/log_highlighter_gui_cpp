@@ -11,8 +11,6 @@ constexpr ImVec4 clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
 void App::Init() {
     glfwInit();
     
-    
-    // Create window with graphics context
     m_Window = glfwCreateWindow(1280, 720, "Log Highlighter", nullptr, nullptr);
 
     glfwMakeContextCurrent(m_Window);
@@ -30,7 +28,6 @@ void App::Init() {
 }
 
 void App::RenderFrame() {
-    // Render
     ImGui::Render();
     int display_w, display_h;
     glfwGetFramebufferSize(m_Window, &display_w, &display_h);
@@ -42,7 +39,6 @@ void App::RenderFrame() {
 
 
 void App::Cleanup() {
-    // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -52,10 +48,8 @@ void App::Cleanup() {
 
 
 void App::Run(const LogInformation& log_information) {
-    
     Init();
     
-    // Main loop
     while (!glfwWindowShouldClose(m_Window)) {
         glfwPollEvents();
         

@@ -19,6 +19,8 @@ size_t CountFileLines(const std::string& filepath) {
     while (std::getline(file, line)) {
         ++count;
     }
+    
+    file.close();
     return count;
 }
 

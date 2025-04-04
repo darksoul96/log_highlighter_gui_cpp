@@ -59,3 +59,8 @@ endif()
 # Optional: enable ImGui's OpenGL loader
 add_definitions(-DIMGUI_IMPL_OPENGL_LOADER_GLAD)
 
+
+if(UNIX AND NOT APPLE)
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(LogHighlighter PRIVATE OpenGL::GL)
+endif()

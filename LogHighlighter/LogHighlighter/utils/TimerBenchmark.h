@@ -16,8 +16,8 @@ public:
         auto duration = end - start;
         auto duration_miliseconds = duration * 0.001;
         
-        std::cout << duration << " microseconds" << std::endl;
-        std::cout << duration_miliseconds << " miliseconds" << std::endl;
+        std::cout << duration.count() << " microseconds" << std::endl;
+        std::cout << duration_miliseconds.count() << " miliseconds" << std::endl;
     }
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTime;

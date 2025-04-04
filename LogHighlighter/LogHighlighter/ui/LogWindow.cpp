@@ -23,6 +23,8 @@ constexpr ImU32 STACK_COLOR = IM_COL32(233, 196, 106, 255);
 
 void LogWindow::Create(const LogInformation& log_information) {
     uint line_number = 1;
+    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(1280, 720), ImGuiCond_FirstUseEver);
     ImGui::Begin(log_information.title.c_str());
     ImVec2 avail = ImGui::GetContentRegionAvail();
     ImGui::BeginChild("LogRegion", avail, true, ImGuiWindowFlags_HorizontalScrollbar);

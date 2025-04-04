@@ -1,5 +1,5 @@
 #include <iostream>
-#include "app.h"
+#include "App.h"
 #include <GLFW/glfw3.h>
 #include <string>
 #include <array>

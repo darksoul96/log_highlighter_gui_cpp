@@ -34,7 +34,7 @@ This project uses [CMake](https://cmake.org/) to build. You’ll need a C++17 co
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/LogHighlighter.git
+   git clone https://github.com/darksoul96/LogHighlighter.git
    cd LogHighlighter
    ```
 

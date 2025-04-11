@@ -1,5 +1,5 @@
-#ifndef TimerBenchmark_h
-#define TimerBenchmark_h
+#ifndef TimerBenchmark_hpp
+#define TimerBenchmark_hpp
 
 class Timer {
 
@@ -22,4 +22,4 @@ public:
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTime;
 };
-#endif /* TimerBenchmark_h */
+#endif /* TimerBenchmark_hpp */

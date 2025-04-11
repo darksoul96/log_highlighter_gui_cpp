@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include "LogWindow.h"
+#include "LogWindow.hpp"
 #include "../imgui/imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include <string>
 #include <vector>
-
 
 constexpr const char* ERROR_LINE = "ERROR";
 constexpr const char* WARN_LINE = "WARN";
@@ -21,16 +20,16 @@ constexpr ImU32 INFO_COLOR = IM_COL32(74, 144, 226, 255);
 constexpr ImU32 STACK_COLOR = IM_COL32(233, 196, 106, 255);
 
 
-void LogWindow::Create(const LogInformation& log_information) {
-    uint line_number = 1;
+void LogWindow::Create(const LogInformation& logInformation) {
+    uint lineNumber = 1;
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(1280, 720), ImGuiCond_FirstUseEver);
-    ImGui::Begin(log_information.title.c_str());
+    ImGui::Begin(logInformation.title.c_str());
     ImVec2 avail = ImGui::GetContentRegionAvail();
     ImGui::BeginChild("LogRegion", avail, true, ImGuiWindowFlags_HorizontalScrollbar);
-    for (const auto& line : log_information.log_lines) {
+    for (const auto& line : logInformation.logLines) {
         ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(150, 150, 150, 255));
-        ImGui::Text("%5d", line_number++);
+        ImGui::Text("%5d", lineNumber++);
         ImGui::PopStyleColor();
         ImGui::SameLine();
         

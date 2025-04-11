@@ -1,12 +1,11 @@
-#include "App.h"
+#include "App.hpp"
 #include "imgui/imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-
 #define GL_SILENCE_DEPRECATION
 #include <GLFW/glfw3.h>
 
-constexpr ImVec4 clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
+constexpr ImVec4 g_clearColor = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
 
 void App::Init() {
     glfwInit();
@@ -32,7 +31,7 @@ void App::RenderFrame() {
     int display_w, display_h;
     glfwGetFramebufferSize(m_Window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+    glClearColor(g_clearColor.x, g_clearColor.y, g_clearColor.z, g_clearColor.w);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -47,7 +46,7 @@ void App::Cleanup() {
 }
 
 
-void App::Run(const LogInformation& log_information) {
+void App::Run(const LogInformation& logInformation) {
     Init();
     
     while (!glfwWindowShouldClose(m_Window)) {
@@ -59,7 +58,7 @@ void App::Run(const LogInformation& log_information) {
         ImGui::NewFrame();
        
         //Call Log Window Rendering
-        m_LogWindow.Create(log_information);
+        m_LogWindow.Create(logInformation);
         
         ImGui::End();
 

@@ -1,13 +1,12 @@
-#include "ui/LogWindow.h"
+#include "ui/LogWindow.hpp"
 #include <string>
-#ifndef App_h
-#define App_h
-
+#ifndef App_hpp
+#define App_hpp
 
 class App {
    
 public:
-    void Run(const LogInformation& log_information);
+    void Run(const LogInformation& logInformation);
 
 private:
     struct GLFWwindow* m_Window = nullptr;

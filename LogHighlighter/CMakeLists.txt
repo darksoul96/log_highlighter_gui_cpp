@@ -4,6 +4,9 @@ project(LogHighlighter)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE Release)
 
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
 # Add all .cpp and .h in your LogHighlighter directory
 file(GLOB_RECURSE SOURCES
     LogHighlighter/*.cpp
@@ -49,12 +52,15 @@ endif()
 
 # macOS-specific frameworks (needed by GLFW)
 if(APPLE)
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -march=native")
     find_library(COCOA_LIB Cocoa)
     find_library(OPENGL_LIB OpenGL)
     find_library(IOKIT_LIB IOKit)
     find_library(QUARTZ_LIB QuartzCore)
     target_link_libraries(LogHighlighter PRIVATE ${COCOA_LIB} ${OPENGL_LIB} ${IOKIT_LIB} ${QUARTZ_LIB})
 endif()
+message(STATUS "C++ flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+
 
 # Optional: enable ImGui's OpenGL loader
 add_definitions(-DIMGUI_IMPL_OPENGL_LOADER_GLAD)
@@ -64,3 +70,5 @@ if(UNIX AND NOT APPLE)
     find_package(OpenGL REQUIRED)
     target_link_libraries(LogHighlighter PRIVATE OpenGL::GL)
 endif()
+
+

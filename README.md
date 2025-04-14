@@ -69,19 +69,20 @@ This project uses [CMake](https://cmake.org/) to build. You’ll need a C++17 co
 
 ## ▶️ How to Use
 
-Once built, you can run the app like this:
+Once built, you can run the app like this from the /build directory:
 
 ```bash
-./LogHighlighter <log_file>
+./LogHighlighter <log_file_path> <rules_file_path>
 ```
+There's a rules pattern file already included by the name "rules.config".
 
 Example:
 
 ```bash
-./LogHighlighter ~/logs/server.log
+./LogHighlighter ~/logs/server.log ~/rules/rules.config
 ```
 
-The selected log file will be visualized with color-coded lines for better readability.
+The selected log file will be visualized with color-coded lines for better readability. These colors and pattern matching can be configured to your needs from the rules.config file which you need to pass as the third argument.
 
 ---
 
@@ -92,8 +93,11 @@ The selected log file will be visualized with color-coded lines for better reada
   - `WARN`
   - `INFO`
   - `DEBUG`
+  - Etc
+All configurable from your own rules file for better pattern matching an colors.
 - Scrollable viewer
 - Simple GUI with line numbers
+- Fast even for larger files compared to other viewers
 
 ---
 

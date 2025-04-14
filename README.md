@@ -44,10 +44,26 @@ This project uses [CMake](https://cmake.org/) to build. You’ll need a C++17 co
    ```
 
 3. Build the app in **Release** mode:
-   ```bash
-   cmake ..
+
+#### 🔸 macOS / Linux (terminal)
+
+```bash
+   mkdir build && cd build
+   cmake .. -DCMAKE_BUILD_TYPE=Release
+   cmake --build .
+```
+
+#### Windows' Visual Studio
+```bash
+   cmake .. -G "Visual Studio 17 2022"
    cmake --build . --config Release
-   ```
+```
+
+#### Xcode MacOS
+```bash
+   cmake .. -G "Xcode"
+   cmake --build . --config Release
+```
 
 ---
 

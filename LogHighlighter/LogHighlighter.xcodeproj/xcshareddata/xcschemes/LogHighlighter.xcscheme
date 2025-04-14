@@ -31,7 +31,7 @@
       shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
@@ -54,6 +54,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "/Users/wso2/Desktop/wso2carbon.log"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/wso2/Desktop/rules.config"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

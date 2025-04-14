@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include <iostream>
 #include "imgui/imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -7,9 +8,40 @@
 
 constexpr ImVec4 g_clearColor = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
 
-void App::Init() {
+
+bool App::Initialize(int argc, char** argv) {
+    
+    if (argc < 3) {
+        std::cerr << "Usage: " << argv[0] << " <path-to-log-file> <path-to-rule-file>" << std::endl;
+        return false;
+    }
+    
+    
+    std::string filepath = argv[1];
+    std::string rulesFilepath = argv[2];
+    size_t logFilesize =  FileManagement::CountFileLines(filepath);
+    
+    this->m_logInformation.title = "Log";
+    this->m_logInformation.logLines.reserve(logFilesize);
+    
+    FileManagement::ReadFile(filepath, this->m_logInformation.logLines);
+    this->m_highlightRules = FileManagement::LoadLineRules(rulesFilepath);
+    
+    return true;
+}
+
+void App::InitWindow() {
     glfwInit();
     
+    // Force OpenGL 3.2 Core Profile
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    // Optional but useful:
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
     m_Window = glfwCreateWindow(1280, 720, "Log Highlighter", nullptr, nullptr);
 
     glfwMakeContextCurrent(m_Window);
@@ -23,7 +55,7 @@ void App::Init() {
 
     // Platform/Renderer bindings
     ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
-    ImGui_ImplOpenGL3_Init("#version 120");
+    ImGui_ImplOpenGL3_Init("#version 150");
 }
 
 void App::RenderFrame() {
@@ -45,9 +77,8 @@ void App::Cleanup() {
     glfwTerminate();
 }
 
-
-void App::Run(const LogInformation& logInformation) {
-    Init();
+void App::Run() {
+    InitWindow();
     
     while (!glfwWindowShouldClose(m_Window)) {
         glfwPollEvents();
@@ -58,7 +89,7 @@ void App::Run(const LogInformation& logInformation) {
         ImGui::NewFrame();
        
         //Call Log Window Rendering
-        m_LogWindow.Create(logInformation);
+        m_LogWindow.Create(this->m_logInformation, this->m_highlightRules);
         
         ImGui::End();
 

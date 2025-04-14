@@ -1,14 +1,8 @@
-//
-//  FileManagement.cpp
-//  LogHighlighter
-//
-//  Created by WSO2 on 11/04/2025.
-//
-
 #include "FileManagement.hpp"
 #include <fstream>
 #include <assert.h>
 #include <iostream>
+#include <sstream>
 
 
 size_t FileManagement::CountFileLines(const std::string& filepath) {
@@ -23,6 +17,36 @@ size_t FileManagement::CountFileLines(const std::string& filepath) {
     
     file.close();
     return count;
+}
+
+
+std::vector<HighlightRule> FileManagement::LoadLineRules(const std::string& rulesFilepath) {
+    std::ifstream file(rulesFilepath);
+    
+    std::vector<HighlightRule> ruleLines;
+    ruleLines.reserve(6);
+    std::string line;
+    
+    if (!file.is_open()) {
+        std::cerr << "Failed to open rules file!" << std::endl;
+        return ruleLines;
+    }
+    
+
+    while (std::getline(file, line)) {
+        std::istringstream inputStringStream(line);
+        std::string pattern;
+        unsigned int r, g, b, alpha;
+        
+        if (!(inputStringStream >> std::quoted(pattern) >> r >> g >> b >> alpha)) {
+            continue; // skip malformed lines
+        }
+        
+        ruleLines.emplace_back(pattern, r, g, b, alpha);
+    }
+    file.close();
+    
+    return ruleLines;
 }
 
 

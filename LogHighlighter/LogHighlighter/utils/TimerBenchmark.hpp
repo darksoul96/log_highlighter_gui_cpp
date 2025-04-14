@@ -1,3 +1,4 @@
+#include <iostream>
 #ifndef TimerBenchmark_hpp
 #define TimerBenchmark_hpp
 

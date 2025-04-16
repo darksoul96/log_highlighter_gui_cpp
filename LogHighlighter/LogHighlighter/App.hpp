@@ -6,15 +6,17 @@
 #ifndef App_hpp
 #define App_hpp
 
+
+
 class App {
    
 public:
-    LogInformation m_logInformation;
     std::vector<HighlightRule> m_highlightRules;
     bool Initialize(int , char**);
     void Run();
 
 private:
+    std::vector<ParsedTextColored> m_ParsedTextList;
     struct GLFWwindow* m_Window = nullptr;
     LogWindow m_LogWindow;
     void InitWindow();

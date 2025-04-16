@@ -15,18 +15,15 @@ bool App::Initialize(int argc, char** argv) {
         std::cerr << "Usage: " << argv[0] << " <path-to-log-file> <path-to-rule-file>" << std::endl;
         return false;
     }
-    
-    
+     
     std::string filepath = argv[1];
     std::string rulesFilepath = argv[2];
-    size_t logFilesize =  FileManagement::CountFileLines(filepath);
+    size_t logFileSize =  FileManagement::CountFileLines(filepath);
     
-    this->m_logInformation.title = "Log";
-    this->m_logInformation.logLines.reserve(logFilesize);
-    
-    FileManagement::ReadFile(filepath, this->m_logInformation.logLines);
     this->m_highlightRules = FileManagement::LoadLineRules(rulesFilepath);
-    
+
+    this->m_ParsedTextList = FileManagement::ParseLogFile(filepath, logFileSize, this->m_highlightRules);
+
     return true;
 }
 
@@ -89,7 +86,7 @@ void App::Run() {
         ImGui::NewFrame();
        
         //Call Log Window Rendering
-        m_LogWindow.Create(this->m_logInformation, this->m_highlightRules);
+        m_LogWindow.Create(this->m_ParsedTextList);
         
         ImGui::End();
 

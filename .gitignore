@@ -58,3 +58,4 @@ Makefile
 **/xcuserdata/
 **/*.xcuserdatad/
 **/*.xcuserstate
+.vscode/settings.json

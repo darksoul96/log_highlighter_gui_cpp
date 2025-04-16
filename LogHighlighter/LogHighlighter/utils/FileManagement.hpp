@@ -9,6 +9,12 @@
 
 
 
+
+struct ParsedTextColored {
+    std::string text;
+    ImU32 color;
+};
+
 struct HighlightRule {
     std::string PatternRule;
     ImU32 ColorRule;
@@ -24,9 +30,9 @@ namespace FileManagement {
 
     size_t CountFileLines(const std::string& filepath);
     
-    void ReadFile(const std::string &filepath, std::vector<std::string>& logLines);
-
     std::vector<HighlightRule> LoadLineRules(const std::string& rulesFilepath);
+
+    std::vector<ParsedTextColored> ParseLogFile(const std::string& filepath, const size_t fileSize, const std::vector<HighlightRule>& rules);
 
 }
 

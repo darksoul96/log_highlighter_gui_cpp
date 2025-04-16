@@ -5,12 +5,12 @@
 #include "imgui_impl_opengl3.h"
 
 
-void LogWindow::Create(const LogInformation& logInformation, const std::vector<HighlightRule>& highlightRules) {
+void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList) {
     
     unsigned int lineNumber = 1;
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(1280, 720), ImGuiCond_FirstUseEver);
-    ImGui::Begin(logInformation.title.c_str());
+    ImGui::Begin("Parsed Log");
     
     ImGuiIO& io = ImGui::GetIO();
     ImGui::Text("FPS: %.1f | Frame: %.3f ms", io.Framerate, 1000.0f / io.Framerate);
@@ -18,28 +18,26 @@ void LogWindow::Create(const LogInformation& logInformation, const std::vector<H
     ImVec2 avail = ImGui::GetContentRegionAvail();
     ImGui::BeginChild("LogRegion", avail, true, ImGuiWindowFlags_HorizontalScrollbar);
     
-    for (const auto& line : logInformation.logLines) {
-        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(150, 150, 150, 255));
-        ImGui::Text("%5d", lineNumber++);
-        ImGui::PopStyleColor();
-        ImGui::SameLine();
-        
-        bool matched = false;
-        
-        for (const auto& rule : highlightRules) {
-            if (line.find(rule.PatternRule) != std::string::npos) {
-                ImGui::PushStyleColor(ImGuiCol_Text, rule.ColorRule);
-                ImGui::TextUnformatted(line.c_str());
-                ImGui::PopStyleColor();
-                matched = true;
-                break;
-            }
-        }
-        
-        if (!matched) {
-            ImGui::TextUnformatted(line.c_str());
+
+    ImGuiListClipper clipper;
+    clipper.Begin(static_cast<int>(parsedTextList.size()));
+
+    while (clipper.Step()) {
+        for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i) {
+            const auto& line = parsedTextList[i];
+
+            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(150, 150, 150, 255));
+            ImGui::Text("%5d", i + 1);
+            ImGui::PopStyleColor();
+
+            ImGui::SameLine();
+
+            ImGui::PushStyleColor(ImGuiCol_Text, line.color);
+            ImGui::TextUnformatted(line.text.c_str());
+            ImGui::PopStyleColor();
         }
     }
+
     ImGui::EndChild();
 }
 

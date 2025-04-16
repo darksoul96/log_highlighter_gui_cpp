@@ -5,6 +5,7 @@
 #include <sstream>
 
 
+
 size_t FileManagement::CountFileLines(const std::string& filepath) {
     std::ifstream file(filepath);
     assert(file.is_open());
@@ -50,16 +51,30 @@ std::vector<HighlightRule> FileManagement::LoadLineRules(const std::string& rule
 }
 
 
-void FileManagement::ReadFile(const std::string &filepath, std::vector<std::string>& logLines) {
-    std::cout << filepath << std::endl;
-    std::vector<std::string> lines;
+std::vector<ParsedTextColored> FileManagement::ParseLogFile(const std::string& filepath, const size_t fileSize, const std::vector<HighlightRule>& rules) {
     std::ifstream file(filepath);
-    
+
     assert(file.is_open());
+
+    std::vector<ParsedTextColored> parsedText;
+    parsedText.reserve(fileSize);
     std::string line;
     while (std::getline(file, line)) {
-        logLines.emplace_back(line);
+        ParsedTextColored newParsedLine;
+        newParsedLine.text = line;
+        newParsedLine.color = 0xFFFFFFFF; 
+        for (const auto& rule : rules) {
+            if (line.find(rule.PatternRule) != std::string::npos) {
+                newParsedLine.color = rule.ColorRule;
+                break;
+            }
+        }
+        parsedText.push_back(newParsedLine);
     }
+
     file.close();
+
+    return parsedText;
 }
+
 

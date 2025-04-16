@@ -5,7 +5,7 @@
 #include "imgui_impl_opengl3.h"
 
 
-void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList) {
+void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, const bool wrapText) {
     
     unsigned int lineNumber = 1;
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
@@ -22,6 +22,10 @@ void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList) {
     ImGuiListClipper clipper;
     clipper.Begin(static_cast<int>(parsedTextList.size()));
 
+    auto drawText = (wrapText)
+    ? [](const std::string& str) { ImGui::TextWrapped("%s", str.c_str()); }
+    : [](const std::string& str) { ImGui::TextUnformatted(str.c_str()); };
+
     while (clipper.Step()) {
         for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i) {
             const auto& line = parsedTextList[i];
@@ -33,7 +37,7 @@ void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList) {
             ImGui::SameLine();
 
             ImGui::PushStyleColor(ImGuiCol_Text, line.color);
-            ImGui::TextUnformatted(line.text.c_str());
+            drawText(line.text.c_str());
             ImGui::PopStyleColor();
         }
     }

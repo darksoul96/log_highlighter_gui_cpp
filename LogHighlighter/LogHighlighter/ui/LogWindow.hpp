@@ -13,7 +13,7 @@
 class LogWindow {
     
 public:
-    void Create(const std::vector<ParsedTextColored>& parsedTextList);
+    void Create(const std::vector<ParsedTextColored>& parsedTextList, const bool wrapText);
     
 private:
     

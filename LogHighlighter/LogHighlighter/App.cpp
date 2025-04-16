@@ -18,11 +18,23 @@ bool App::Initialize(int argc, char** argv) {
      
     std::string filepath = argv[1];
     std::string rulesFilepath = argv[2];
+
+    bool wrapText = false;
+
+    for (int i = 3; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--wrapped") {
+            wrapText = true;
+        }
+    }
+
     size_t logFileSize =  FileManagement::CountFileLines(filepath);
     
     this->m_highlightRules = FileManagement::LoadLineRules(rulesFilepath);
 
     this->m_ParsedTextList = FileManagement::ParseLogFile(filepath, logFileSize, this->m_highlightRules);
+
+    this->m_wrapText = wrapText;
 
     return true;
 }
@@ -86,7 +98,7 @@ void App::Run() {
         ImGui::NewFrame();
        
         //Call Log Window Rendering
-        m_LogWindow.Create(this->m_ParsedTextList);
+        m_LogWindow.Create(this->m_ParsedTextList, this->m_wrapText);
         
         ImGui::End();
 

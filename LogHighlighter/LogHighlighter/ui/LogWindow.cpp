@@ -5,7 +5,7 @@
 #include "imgui_impl_opengl3.h"
 
 
-void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, const bool wrapText) {
+void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, const bool wrapText, const bool useLightBackground) {
     
     unsigned int lineNumber = 1;
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
@@ -16,6 +16,11 @@ void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, con
     ImGui::Text("FPS: %.1f | Frame: %.3f ms", io.Framerate, 1000.0f / io.Framerate);
     
     ImVec2 avail = ImGui::GetContentRegionAvail();
+
+
+    if (useLightBackground) {
+        ImGui::PushStyleColor(ImGuiCol_ChildBg, IM_COL32(248, 248, 245, 255));
+    }
     ImGui::BeginChild("LogRegion", avail, true, ImGuiWindowFlags_HorizontalScrollbar);
     
 
@@ -40,6 +45,10 @@ void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, con
             drawText(line.text.c_str());
             ImGui::PopStyleColor();
         }
+    }
+
+    if (useLightBackground) {
+        ImGui::PopStyleColor();
     }
 
     ImGui::EndChild();

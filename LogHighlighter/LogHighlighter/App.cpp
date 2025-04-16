@@ -20,11 +20,13 @@ bool App::Initialize(int argc, char** argv) {
     std::string rulesFilepath = argv[2];
 
     bool wrapText = false;
-
+    bool useLightColor = false;
     for (int i = 3; i < argc; ++i) {
         std::string arg = argv[i];
         if (arg == "--wrapped") {
             wrapText = true;
+        } else if (arg == "--light-bg") {
+            useLightColor = true;
         }
     }
 
@@ -35,6 +37,7 @@ bool App::Initialize(int argc, char** argv) {
     this->m_ParsedTextList = FileManagement::ParseLogFile(filepath, logFileSize, this->m_highlightRules);
 
     this->m_wrapText = wrapText;
+    this->m_useLightColor = useLightColor;
 
     return true;
 }
@@ -98,7 +101,7 @@ void App::Run() {
         ImGui::NewFrame();
        
         //Call Log Window Rendering
-        m_LogWindow.Create(this->m_ParsedTextList, this->m_wrapText);
+        m_LogWindow.Create(this->m_ParsedTextList, this->m_wrapText, this->m_useLightColor);
         
         ImGui::End();
 

@@ -59,3 +59,4 @@ Makefile
 **/*.xcuserdatad/
 **/*.xcuserstate
 .vscode/settings.json
+/dist

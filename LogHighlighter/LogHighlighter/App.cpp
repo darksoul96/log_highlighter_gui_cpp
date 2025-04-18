@@ -8,6 +8,8 @@
 
 constexpr ImVec4 g_clearColor = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
 
+bool App::m_wrapText = false;
+
 
 bool App::Initialize(int argc, char** argv) {
     
@@ -19,13 +21,10 @@ bool App::Initialize(int argc, char** argv) {
     std::string filepath = argv[1];
     std::string rulesFilepath = argv[2];
 
-    bool wrapText = false;
     bool useLightColor = false;
     for (int i = 3; i < argc; ++i) {
         std::string arg = argv[i];
-        if (arg == "--wrapped") {
-            wrapText = true;
-        } else if (arg == "--light-bg") {
+        if (arg == "--light-bg") {
             useLightColor = true;
         }
     }
@@ -36,7 +35,7 @@ bool App::Initialize(int argc, char** argv) {
 
     this->m_ParsedTextList = FileManagement::ParseLogFile(filepath, logFileSize, this->m_highlightRules);
 
-    this->m_wrapText = wrapText;
+    this->m_wrapText = false; 
     this->m_useLightColor = useLightColor;
 
     return true;
@@ -91,7 +90,7 @@ void App::Cleanup() {
 
 void App::Run() {
     InitWindow();
-    
+   
     while (!glfwWindowShouldClose(m_Window)) {
         glfwPollEvents();
         
@@ -100,6 +99,7 @@ void App::Run() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
        
+
         //Call Log Window Rendering
         m_LogWindow.Create(this->m_ParsedTextList, this->m_wrapText, this->m_useLightColor);
         

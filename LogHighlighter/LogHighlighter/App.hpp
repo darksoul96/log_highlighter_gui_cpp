@@ -12,7 +12,7 @@ class App {
    
 public:
     std::vector<HighlightRule> m_highlightRules;
-    bool m_wrapText;
+    static bool m_wrapText;
     bool m_useLightColor;
     bool Initialize(int , char**);
     void Run();

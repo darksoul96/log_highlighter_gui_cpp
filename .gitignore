@@ -60,3 +60,4 @@ Makefile
 **/*.xcuserstate
 .vscode/settings.json
 /dist
+.vscode/launch.json

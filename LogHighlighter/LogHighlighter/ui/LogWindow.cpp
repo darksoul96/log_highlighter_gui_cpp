@@ -62,7 +62,7 @@ void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, boo
         while (clipper.Step()) {
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i) {
                 const auto& line = filteredList[i];
-                DrawLine(*line, wrapText, i);
+                DrawLine(*line, wrapText);
             }
         }
     } else {
@@ -70,7 +70,7 @@ void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, boo
         while (clipper.Step()) {
             for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i) {
                 const auto& line = parsedTextList[i];
-                DrawLine(line, wrapText, i);
+                DrawLine(line, wrapText);
             }
         }
     }
@@ -83,9 +83,9 @@ void LogWindow::Create(const std::vector<ParsedTextColored>& parsedTextList, boo
 }
 
 
-void LogWindow::DrawLine(const ParsedTextColored& line, const bool& wrapText, const int& index) {
+void LogWindow::DrawLine(const ParsedTextColored& line, const bool& wrapText) {
     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(150, 150, 150, 255));
-    ImGui::Text("%5d", index + 1);
+    ImGui::Text("%5d", (int)(line.index + 1));
     ImGui::PopStyleColor();
 
     ImGui::SameLine();

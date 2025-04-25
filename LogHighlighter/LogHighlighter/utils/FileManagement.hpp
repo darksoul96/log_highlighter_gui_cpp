@@ -11,6 +11,7 @@
 
 
 struct ParsedTextColored {
+    size_t index;
     std::string text;
     ImU32 color;
 };

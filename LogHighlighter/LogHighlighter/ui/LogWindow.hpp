@@ -15,7 +15,7 @@ class LogWindow {
 public:
     void Create(const std::vector<ParsedTextColored>& parsedTextList, bool& wrapText, const bool useLightBackground);
 
-    void DrawLine(const ParsedTextColored& line, const bool& wrapText, const int& index);
+    void DrawLine(const ParsedTextColored& line, const bool& wrapText);
     
 private:
     

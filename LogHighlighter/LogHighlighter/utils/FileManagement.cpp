@@ -59,8 +59,11 @@ std::vector<ParsedTextColored> FileManagement::ParseLogFile(const std::string& f
     std::vector<ParsedTextColored> parsedText;
     parsedText.reserve(fileSize);
     std::string line;
+
+    size_t line_number = 0;
     while (std::getline(file, line)) {
         ParsedTextColored newParsedLine;
+        newParsedLine.index = line_number;
         newParsedLine.text = line;
         newParsedLine.color = 0xFFFFFFFF; 
         for (const auto& rule : rules) {
@@ -69,6 +72,8 @@ std::vector<ParsedTextColored> FileManagement::ParseLogFile(const std::string& f
                 break;
             }
         }
+
+        line_number++;
         parsedText.push_back(newParsedLine);
     }
 
